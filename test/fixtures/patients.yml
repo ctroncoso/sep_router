@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  rut: MyString
+  ingreso: 1
+  started_at: 2011-11-29 15:51:23
+  finished_at: 2011-11-29 15:51:23
+
+two:
+  name: MyString
+  rut: MyString
+  ingreso: 1
+  started_at: 2011-11-29 15:51:23
+  finished_at: 2011-11-29 15:51:23
