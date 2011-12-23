@@ -1,0 +1,23 @@
+<h1>Listing punto_servicios</h1>
+
+<table>
+  <tr>
+    <th>Descripcion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @punto_servicios.each do |punto_servicio| %>
+  <tr>
+    <td><%= punto_servicio.descripcion %></td>
+    <td><%= link_to 'Show', punto_servicio %></td>
+    <td><%= link_to 'Edit', edit_punto_servicio_path(punto_servicio) %></td>
+    <td><%= link_to 'Destroy', punto_servicio, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Punto servicio', new_punto_servicio_path %>

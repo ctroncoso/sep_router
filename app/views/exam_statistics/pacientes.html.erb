@@ -1,0 +1,20 @@
+<h1>Carga de Exámenes para SEP-HTS</h1>
+<h2><%=Time.now.to_formatted_s(:long) %></h2>
+
+
+<table>
+  <tr>
+    <th>Examen</th>
+    <th>ID</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pacientes.each do |paciente| %>
+  <tr>
+    <td><%= link_to paciente.name, patient_exams_path(paciente)%></td>
+    <td><%= paciente.id%></td>
+  </tr>
+<% end %>
+</table>
+<br />

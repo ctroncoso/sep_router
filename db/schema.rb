@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129185123) do
+ActiveRecord::Schema.define(:version => 20111212213844) do
+
+  create_table "exams", :force => true do |t|
+    t.integer  "patient_id"
+    t.integer  "prestacion_id"
+    t.text     "exam_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ingresos_sep_historicos", :id => false, :force => true do |t|
     t.string  "AGENCI647A", :limit => 80
@@ -114,12 +122,36 @@ ActiveRecord::Schema.define(:version => 20111129185123) do
     t.time    "HORPRO647A"
   end
 
+  add_index "ingresos_sep_hts", ["FECING647A", "HORING647A"], :name => "ingreso"
+  add_index "ingresos_sep_hts", ["FECPRO647A", "HORPRO647A"], :name => "procesamiento"
+
   create_table "patients", :force => true do |t|
     t.string   "name"
     t.string   "rut"
     t.integer  "ingreso"
     t.datetime "started_at"
     t.datetime "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "processed"
+    t.string   "rut_empresa"
+  end
+
+  create_table "prestaciones", :id => false, :force => true do |t|
+    t.integer "codpre647a",               :default => 0, :null => false
+    t.string  "despre647a", :limit => 80
+  end
+
+  create_table "prestacions", :force => true do |t|
+    t.integer  "cod_prestacion"
+    t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "punto_servicio_id"
+  end
+
+  create_table "punto_servicios", :force => true do |t|
+    t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,9 +1,25 @@
 SepRouter::Application.routes.draw do
-  resources :patients
+
+  resources :prestacions do
+    resources :punto_servicios
+  end
+
+  resources :punto_servicios
+  resources :patients do
+    resources :exams do
+      resources :puntos_servicio
+    end
+  end
+  resources :exams
   match 'loader/full' => 'iseries_loader#render_full'
   match 'loader/pacientes' => 'iseries_loader#render_pacientes'
   match 'loader/examenes' => 'iseries_loader#render_examenes'
   match 'loader/ultimos' => 'iseries_loader#render_full_n'
+  match 'loader/load' => 'iseries_loader#load'
+  match 'loader/session' => 'iseries_loader#my_session'
+
+  match 'estadistica/carga_examenes' => "ExamStatistics#index" 
+  match 'estadistica/pacientes' => "ExamStatistics#pacientes"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

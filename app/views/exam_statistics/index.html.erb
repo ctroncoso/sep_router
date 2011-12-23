@@ -1,0 +1,21 @@
+<h1>Carga de Exámenes para SEP-HTS</h1>
+<h2><%=Time.now.to_formatted_s(:long) %></h2>
+
+
+<table>
+  <tr>
+    <th>Examen</th>
+    <th>Cantidad</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @exams.each do |exam| %>
+  <tr>
+    <td><%= link_to exam[1], estadistica_pacientes_path(:prestacion => exam[0]) %></td>
+    <td><%= exam[2]%></td>
+  </tr>
+<% end %>
+</table>
+<br />

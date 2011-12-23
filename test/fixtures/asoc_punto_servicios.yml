@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  examen_id: 1
+  punto_servicio_id: 1
+
+two:
+  examen_id: 1
+  punto_servicio_id: 1

@@ -4,28 +4,26 @@
   <tr>
     <th>Name</th>
     <th>Rut</th>
-    <th>Ingreso</th>
-    <th>Started at</th>
+    <th>Rut empresa</th>
+    <th># Examenes</th>
+    <th>Hora de llegada</th>
     <th>Finished at</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Transcurrido</th>
   </tr>
 
 <% @patients.each do |patient| %>
   <tr>
-    <td><%= patient.name %></td>
+    <td><%= link_to patient.name, patient_exams_url(patient),{:title => patient.exams.map{|e|e.exam_name}.join("\n")} %></td>
     <td><%= patient.rut %></td>
-    <td><%= patient.ingreso %></td>
+    <td><%= patient.rut_empresa %></td>
+    <td><%= patient.exams.count %></td>
     <td><%= patient.started_at %></td>
     <td><%= patient.finished_at %></td>
-    <td><%= link_to 'Show', patient %></td>
-    <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-    <td><%= link_to 'Destroy', patient, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= "hace #{((Time.now - patient.started_at)/60).to_i-180} minutos"  %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Patient', new_patient_path %>
+

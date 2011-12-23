@@ -1,0 +1,28 @@
+<h1>Listing prestacions</h1>
+
+<table>
+  <tr>
+    <th>Cod prestacion</th>
+    <th>Descripcion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @prestacions.each do |prestacion| %>
+  <tr>
+    <td><%= prestacion.cod_prestacion %></td>
+    <td><%= prestacion.descripcion %></td>
+    <td><%= if (prestacion.punto_servicio_id) 
+              PuntoServicio.find(prestacion.punto_servicio_id).descripcion else "" end%></td>
+    <td><%= link_to 'Show', prestacion %></td>
+    <td><%= link_to 'Edit', edit_prestacion_path(prestacion) %></td>
+    <td><%= link_to 'Destroy', prestacion, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Prestacion', new_prestacion_path %>

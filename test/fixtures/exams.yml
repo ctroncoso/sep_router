@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  patient_id: 1
+  exam_id: 1
+  exam_name: MyText
+
+two:
+  patient_id: 1
+  exam_id: 1
+  exam_name: MyText

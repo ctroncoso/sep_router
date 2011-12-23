@@ -2,11 +2,11 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
-
+    @patients = Patient.includes([:exams]).where("Date(started_at) = ?", Date.today).order("started_at desc")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @patients }
+      format.xml { render xml: @patients }
     end
   end
 

@@ -1,0 +1,26 @@
+<h1>Listing exams</h1>
+
+Nombre: <%= @exams.first.patient.name %> <br />
+Ingresado a: <%= @exams.first.patient.started_at.to_formatted_s(:long) %> <br />
+
+<table>
+  <tr>
+    <th>Patient</th>
+    <th>Exam</th>
+    <th>Exam name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @exams.each do |exam| %>
+  <tr>
+    <td><%= exam.patient_id %></td>
+    <td><%= exam.prestacion_id %></td>
+    <td><%= exam.exam_name %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
