@@ -17,11 +17,17 @@ class ExamStatistics
     end
    end
 
+  # Obtiene lista de pacientes de hoy, para una prestación dada.
+  # FIXME: Debe basarse en modelo de paciente y no de exámen.
   def self.pacientes(prestacion)
     self.examenes.where(:exams => {:prestacion_id => prestacion})
   end
 
+  # TODO: Verificar si se ejecuta
+  # Log deja registro 
+  # Verificar log por si se ejecuta el código.
   def self.compilado
+    Rails.logger.info "****WARNING****   Ejecutando -ExamStatistics.compilado-"
     compilado = Hash.new
     self.prestaciones.each do |prestacion|
       id=prestacion[0]
@@ -32,7 +38,4 @@ class ExamStatistics
     end
     compilado
   end
-
-
-
 end
