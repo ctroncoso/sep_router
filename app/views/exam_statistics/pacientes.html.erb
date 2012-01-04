@@ -1,5 +1,5 @@
 <h1>Carga de Pacientes para</h1>
-<h2>Examen <%=pluralize @prestacion.descripcion%></h2>
+<h2>Examen <%= Prestacion.find_by_cod_prestacion(@prestacion).descripcion.strip.titleize%></h2>
 
 
 <table>
