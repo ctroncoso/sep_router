@@ -7,6 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div id="menu_bar">
+    <%= link_to "Carga de Exámenes", estadistica_carga_examenes_path %>
+    <%= link_to "Pacientes", patients_path({:hace_horas => 24}) %>
+    <%= link_to "Prestaciones", prestaciones_path %>
+  </div>
+  <hr />
+   
 
 <%= yield %>
 

@@ -2,7 +2,24 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.includes([:exams]).where("Date(started_at) = ?", Date.today).order("started_at desc")
+    @patients = Patient.includes([:exams])
+
+    if params[:hace_horas]
+      @patients = @patients.hours_ago(params[:hace_horas])
+    else
+      @patients = @patients.of_today
+    end
+
+    case params[:order]
+    when "T"
+      @patients = @patients.order("started_at desc")
+    when "N"
+      @patients = @patients.order("name")
+    else
+      @patients = @patients.order("started_at desc")
+    end
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @patients }

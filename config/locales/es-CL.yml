@@ -64,7 +64,7 @@ es-CL:
     formats:
       default: "%A, %d de %B de %Y %H:%M:%S %z"
       short: "%d de %b %H:%M"
-      long: "%A %d de %B de %Y %H:%M"
+      long: "%A %d de %B de %Y, %H:%M"
     am: "am"
     pm: "pm"
 

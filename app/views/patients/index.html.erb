@@ -1,25 +1,27 @@
 <h1>Listing patients</h1>
-
+<hr />
 <table>
   <tr>
-    <th>Name</th>
+    <th><%= link_to "Name", params.merge({:order => "N"}) %></th>
     <th>Rut</th>
     <th>Rut empresa</th>
     <th># Examenes</th>
-    <th>Hora de llegada</th>
+    <th><%= link_to "Hora de llegada", params.merge({:order => "T"}) %></th>
     <th>Finished at</th>
-    <th>Transcurrido</th>
+    <th><%= link_to "Transcurrido", params.merge({:order => "T"}) %></th>
+    <th>Examenes</th>
   </tr>
 
 <% @patients.each do |patient| %>
   <tr>
-    <td><%= link_to patient.name, patient_exams_url(patient),{:title => patient.exams.map{|e|e.exam_name}.join("\n")} %></td>
+    <td><%= link_to patient.name, patient  %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
     <td><%= patient.exams.count %></td>
     <td><%= patient.started_at %></td>
     <td><%= patient.finished_at %></td>
-    <td><%= "hace #{((Time.now - patient.started_at)/60).to_i-180} minutos"  %></td>
+    <td><%= distance_of_time_in_words_to_now(patient.started_at+3.hours) %></td>
+    <td><%= link_to "examenes", patient_exams_url(patient), {:title => patient.exams.map(&:exam_name).join("\n")} %> </td>
   </tr>
 <% end %>
 </table>
