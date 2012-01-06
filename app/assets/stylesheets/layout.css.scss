@@ -1,0 +1,38 @@
+#menu_bar a {
+  display: inline;
+  padding: 2px;
+  border: 1px dotted orange;
+  text-decoration: none;
+  color: black;}
+
+th {
+  background-color: orange;
+  color: white;
+  }
+
+a {
+  color: blue;
+#  text-decoration: none;
+  &:visited { color: black; }
+  &:hover { color: blue; }
+}
+
+table, td, th {
+  border:  1px solid gray;
+  border-collapse: collapse;
+  padding: 0px 3px;
+  th {color: white;
+    a {
+      color: grey;
+      &:visited {color: grey;}
+      &:hover {color: blue;}
+      }
+  }
+  a {
+    color: blue;
+#    text-decoration: none;
+    &:visited { color: blue; }
+    &:hover { color: red; }
+    }  
+  }
+
