@@ -15,6 +15,8 @@ class PatientsController < ApplicationController
       @patients = @patients.order("started_at desc")
     when "N"
       @patients = @patients.order("name")
+    #TODO Implementar order por exam.count
+
     else
       @patients = @patients.order("started_at desc")
     end
