@@ -2,13 +2,13 @@
 <hr />
 <table>
   <tr>
-    <th><%= link_to "Name", params.merge({:order => "N"}) %></th>
+    <th><%= sortable "name" %></th>
     <th>Rut</th>
     <th>Rut empresa</th>
-    <th># Examenes</th>
-    <th><%= link_to "Hora de llegada", params.merge({:order => "T"}) %></th>
+    <th><%= sortable "examenes" %></th>
+    <th><%= sortable "started_at", "Hora de llegada" %></th>
     <th>Finished at</th>
-    <th><%= link_to "Transcurrido", params.merge({:order => "T"}) %></th>
+    <th><%= sortable "started_at", "Transcurrido" %></th>
     <th>Examenes</th>
   </tr>
 
@@ -17,7 +17,7 @@
     <td><%= link_to patient.name, patient  %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
-    <td><%= patient.exams.count %></td>
+    <td><%= patient.exams.size %></td>
     <td><%= patient.started_at.to_formatted_s(:time) %></td>
     <td><%= patient.finished_at %></td>
     <td><%= distance_of_time_in_words_to_now(patient.started_at+3.hours) %></td>

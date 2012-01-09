@@ -10,17 +10,19 @@ class PatientsController < ApplicationController
       @patients = @patients.of_today
     end
 
-    case params[:order]
-    when "T"
-      @patients = @patients.order("started_at desc")
-    when "N"
-      @patients = @patients.order("name")
-    #TODO Implementar order por exam.count
 
+    #TODO implement reverse order
+    if params[:sort] =="examenes"
+      @patients.sort! do |a,b|
+        a.exams.size <=> b.exams.size
+      end
     else
-      @patients = @patients.order("started_at desc")
+      @patients = @patients.order(params[:sort])
     end
 
+    if params[:direction] == "desc"
+      @patients.reverse!
+    end
 
     respond_to do |format|
       format.html # index.html.erb
