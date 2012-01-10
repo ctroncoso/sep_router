@@ -3,6 +3,8 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.includes([:exams])
+    params[:sort] ||= "started_at"
+    params[:direction] ||= "desc"
 
     if params[:hace_horas]
       @patients = @patients.hours_ago(params[:hace_horas])
