@@ -2,7 +2,11 @@ class PrestacionesController < ApplicationController
   # GET /prestacions
   # GET /prestacions.json
   def index
-    @prestacions = Prestacion.all
+    params[:sort] ||= "punto_servicio_id"
+    params[:direction] ||= "asc"
+  
+    @prestacions = Prestacion.order(params[:sort] + " " + params[:direction])
+
 
     respond_to do |format|
       format.html # index.html.erb

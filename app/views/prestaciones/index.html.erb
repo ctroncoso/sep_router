@@ -3,9 +3,8 @@
 
 <table>
   <tr>
-    <th>Cod prestacion</th>
-    <th>Descripcion</th>
-    <th>Punto de Servicio</th>
+    <th><%= sortable "descripcion", "Descripcion" %></th>
+    <th><%= sortable "punto_servicio_id", "Punto de servicio" %></th>
     <% if admin %>
     <th></th>
     <th></th>
@@ -15,7 +14,6 @@
 
 <% @prestacions.each do |prestacion| %>
   <tr>
-    <td><%= prestacion.cod_prestacion %></td>
     <td><%= prestacion.descripcion %></td>
     <td><%= if (prestacion.punto_servicio_id) 
               PuntoServicio.find(prestacion.punto_servicio_id).descripcion else "" end%></td>
