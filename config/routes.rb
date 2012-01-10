@@ -12,6 +12,7 @@ SepRouter::Application.routes.draw do
     end
   end
   resources :exams
+
   match 'loader/full' => 'iseries_loader#render_full'
   match 'loader/pacientes' => 'iseries_loader#render_pacientes'
   match 'loader/examenes' => 'iseries_loader#render_examenes'
@@ -21,6 +22,10 @@ SepRouter::Application.routes.draw do
 
   match 'estadistica_por_fecha/examenes/carga' => "ExamStatistics#index" , :as => 'estadistica_carga_examenes'
   match 'estadistica_por_fecha/pacientes_por_prestacion/:prestacion' => "ExamStatistics#pacientes", :as => 'estadistica_pacientes'
+
+
+  root :to => 'patients#index'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
