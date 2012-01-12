@@ -7,5 +7,6 @@
    inflect.singular /^(ox)en/i, '\1'
    inflect.irregular 'person', 'people'
    inflect.irregular 'prestacion', 'prestaciones'
+   inflect.irregular 'examen', 'examenes'
    inflect.uncountable %w( fish sheep )
  end
