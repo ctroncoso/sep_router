@@ -1,5 +1,7 @@
 SepRouter::Application.routes.draw do
 
+  resources :colas
+
   resources :prestaciones do
     resources :punto_servicios
   end

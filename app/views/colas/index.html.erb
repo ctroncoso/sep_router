@@ -1,0 +1,31 @@
+<h1>Listing colas</h1>
+
+<table>
+  <tr>
+    <th>Prestacion</th>
+    <th>Exam</th>
+    <th>Encolado at</th>
+    <th>Started at</th>
+    <th>Finished at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @colas.each do |cola| %>
+  <tr>
+    <td><%= cola.prestacion_id %></td>
+    <td><%= cola.exam_id %></td>
+    <td><%= cola.encolado_at %></td>
+    <td><%= cola.started_at %></td>
+    <td><%= cola.finished_at %></td>
+    <td><%= link_to 'Show', cola %></td>
+    <td><%= link_to 'Edit', edit_cola_path(cola) %></td>
+    <td><%= link_to 'Destroy', cola, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cola', new_cola_path %>

@@ -1,0 +1,37 @@
+<%= form_for(@cola) do |f| %>
+  <% if @cola.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cola.errors.count, "error") %> prohibited this cola from being saved:</h2>
+
+      <ul>
+      <% @cola.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :prestacion_id %><br />
+    <%= f.number_field :prestacion_id %>
+  </div>
+  <div class="field">
+    <%= f.label :exam_id %><br />
+    <%= f.number_field :exam_id %>
+  </div>
+  <div class="field">
+    <%= f.label :encolado_at %><br />
+    <%= f.datetime_select :encolado_at %>
+  </div>
+  <div class="field">
+    <%= f.label :started_at %><br />
+    <%= f.datetime_select :started_at %>
+  </div>
+  <div class="field">
+    <%= f.label :finished_at %><br />
+    <%= f.datetime_select :finished_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

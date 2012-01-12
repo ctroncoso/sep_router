@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Prestacion:</b>
+  <%= @cola.prestacion_id %>
+</p>
+
+<p>
+  <b>Exam:</b>
+  <%= @cola.exam_id %>
+</p>
+
+<p>
+  <b>Encolado at:</b>
+  <%= @cola.encolado_at %>
+</p>
+
+<p>
+  <b>Started at:</b>
+  <%= @cola.started_at %>
+</p>
+
+<p>
+  <b>Finished at:</b>
+  <%= @cola.finished_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_cola_path(@cola) %> |
+<%= link_to 'Back', colas_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  prestacion_id: 1
+  exam_id: 1
+  encolado_at: 2012-01-12 15:52:10
+  started_at: 2012-01-12 15:52:10
+  finished_at: 2012-01-12 15:52:10
+
+two:
+  prestacion_id: 1
+  exam_id: 1
+  encolado_at: 2012-01-12 15:52:10
+  started_at: 2012-01-12 15:52:10
+  finished_at: 2012-01-12 15:52:10
