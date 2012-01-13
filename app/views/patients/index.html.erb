@@ -1,5 +1,6 @@
 <div class="menu_bar">
-  <%= link_to "terminados de hoy", patients_path({:filter =>:finalizado})%>
+  <%= link_to "Pendientes de hoy", patients_path%>
+  <%= link_to "Terminados de hoy", patients_path({:filter =>:finalizado})%>
 </div>
 <hr />
 
@@ -9,6 +10,7 @@
 <table>
   <tr>
     <th><%= sortable "name", "Nombre" %></th>
+    <th></th>
     <th><%= sortable "rut", "Rut" %></th>
     <th><%= sortable "rut_empresa", "Rut Empresa" %></th>
     <th><%= sortable "examenes" %></th>
@@ -16,12 +18,12 @@
     <th><%= sortable "finished_at", "Hora de termino" %></th>
     <th><%= sortable "started_at", "Transcurrido" %></th>
     <th>Examenes</th>
-    <th></th>
   </tr>
 
 <% @patients.each do |patient| %>
   <tr class="<%= cycle('oddrow', 'evenrow') %>">
     <td><%= link_to patient.name, patient  %></td>
+    <td><%= link_to_patient_procedure(patient, params[:filter]) %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
     <td><%= patient.exams.size %></td>
@@ -29,7 +31,6 @@
     <td><%= to_time_format(patient.finished_at) %></td>
     <td><%= distance_of_time_in_words_to_now(patient.started_at+3.hours) %></td>
     <td><%= link_to "examenes", patient_exams_url(patient), {:title => patient.exams.map(&:exam_name).join("\n")} %> </td>
-    <td><%= link_to_patient_procedure(patient, params[:filter]) %></td>
   </tr>
 <% end %>
 </table>
