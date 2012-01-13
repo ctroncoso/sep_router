@@ -29,7 +29,7 @@
     <td><%= patient.exams.size %></td>
     <td><%= to_time_format(patient.started_at) %></td>
     <td><%= to_time_format(patient.finished_at) %></td>
-    <td><%= distance_of_time_in_words_to_now(patient.started_at+3.hours) %></td>
+    <td><%= elapsed_time(patient, params[:filter]) %></td>
     <td><%= link_to "examenes", patient_exams_url(patient), {:title => patient.exams.map(&:exam_name).join("\n")} %> </td>
   </tr>
 <% end %>

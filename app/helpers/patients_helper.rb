@@ -6,4 +6,12 @@ module PatientsHelper
       link_to " terminado ", edit_patient_url(patient, :procedure => :finalizar)
     end
   end
+
+  def elapsed_time(patient, filter)
+    if filter == 'finalizado'
+      distance_of_time_in_words_to_now(patient.started_at+3.hours)
+    else
+      distance_of_time_in_words_to_now(patient.started_at, patient.finished_at)
+    end
+  end
 end
