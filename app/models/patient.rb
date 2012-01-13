@@ -12,4 +12,13 @@ class Patient < ActiveRecord::Base
   def self.of_today
     self.hours_ago
   end
+
+  def self.active
+    where('started_at is not null').where('finished_at is null')
+  end
+
+  def self.finished
+    where('started_at is not null').where('finished_at is not null')
+  end
+
 end

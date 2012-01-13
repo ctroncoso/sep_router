@@ -4,10 +4,7 @@ class PrestacionesController < ApplicationController
   def index
     params[:sort] ||= "punto_servicio_id"
     params[:direction] ||= "asc"
-  
     @prestacions = Prestacion.order(params[:sort] + " " + params[:direction])
-
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @prestacions }
@@ -64,7 +61,7 @@ class PrestacionesController < ApplicationController
 
     respond_to do |format|
       if @prestacion.update_attributes(params[:prestacion])
-        format.html { redirect_to @prestacion, notice: 'Prestacion was successfully updated.' }
+        format.html { redirect_to prestaciones_path, notice: 'Prestacion was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -83,5 +80,18 @@ class PrestacionesController < ApplicationController
       format.html { redirect_to prestacions_url }
       format.json { head :ok }
     end
+  end
+
+  def agrega_nuevas_prestaciones
+     p=Exam.includes(:prestacion).where('prestaciones.id' => nil)
+     n=p.map do |e|
+       { :cod_prestacion => e.prestacion_id, 
+         :descripcion    => e.exam_name
+       }
+     end.uniq
+     n.each do |new|
+       Prestacion.create(new)
+     end
+     redirect_to request.referer
   end
 end

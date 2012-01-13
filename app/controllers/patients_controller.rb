@@ -3,6 +3,12 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
     @patients = Patient.includes([:exams])
+    case params[:filter]
+    when 'finalizado'
+      @patients = @patients.finished
+    else
+      @patients = @patients.active
+    end
     params[:sort] ||= "started_at"
     params[:direction] ||= "desc"
 
@@ -100,6 +106,18 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to patients_url }
+      format.json { head :ok }
+    end
+  end
+
+
+  def service_end
+    @patient = Patient.find(params[:id])
+    @patient.finished_at = Time.now - 3.hours
+    @patient.save!
+    
+    respond_to do |format|
+      format.html { redirect_to patients_url}
       format.json { head :ok }
     end
   end

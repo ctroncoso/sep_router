@@ -1,19 +1,5 @@
 SepRouter::Application.routes.draw do
 
-  resources :colas
-
-  resources :prestaciones do
-    resources :punto_servicios
-  end
-
-  resources :punto_servicios
-
-  resources :patients do
-    resources :exams do
-      resources :puntos_servicio
-    end
-  end
-  resources :exams
 
   match 'loader/full' => 'iseries_loader#render_full'
   match 'loader/pacientes' => 'iseries_loader#render_pacientes'
@@ -21,9 +7,25 @@ SepRouter::Application.routes.draw do
   match 'loader/ultimos' => 'iseries_loader#render_full_n'
   match 'loader/load' => 'iseries_loader#load'
   match 'loader/session' => 'iseries_loader#my_session'
-
   match 'estadistica_por_fecha/examenes/carga' => "ExamStatistics#index" , :as => 'estadistica_carga_examenes'
   match 'estadistica_por_fecha/pacientes_por_prestacion/:prestacion' => "ExamStatistics#pacientes", :as => 'estadistica_pacientes'
+  match 'prestaciones/carganuevos' => 'prestaciones#agrega_nuevas_prestaciones'
+  
+  resources :colas
+  resources :prestaciones do
+    resources :punto_servicios
+  end
+
+  resources :punto_servicios
+
+  resources :patients do
+    get 'service_end', :on => :member
+    resources :exams do
+      resources :puntos_servicio
+    end
+  end
+  resources :exams
+
 
 
   root :to => 'patients#index'
