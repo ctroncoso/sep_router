@@ -63,7 +63,14 @@ class PatientsController < ApplicationController
 
   # GET /patients/1/edit
   def edit
-    @patient = Patient.find(params[:id])
+    case params[:procedure]
+    when "finalizar"
+      finalizar()
+    when "devolver_a_cola"
+      nullify_finished_at
+    else
+      @patient = Patient.find(params[:id])
+    end
   end
 
   # POST /patients
@@ -110,12 +117,23 @@ class PatientsController < ApplicationController
     end
   end
 
+private
 
-  def service_end
+  def finalizar
     @patient = Patient.find(params[:id])
     @patient.finished_at = Time.now - 3.hours
     @patient.save!
     
+    respond_to do |format|
+      format.html { redirect_to patients_url}
+      format.json { head :ok }
+    end
+  end
+
+  def nullify_finished_at
+    @patient = Patient.find(params[:id])
+    @patient.finished_at = nil
+    @patient.save!
     respond_to do |format|
       format.html { redirect_to patients_url}
       format.json { head :ok }

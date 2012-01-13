@@ -41,3 +41,9 @@ table, td, th {
     }  
   }
 
+#footer {
+  text-align: center;
+}
+
+table tr.evenrow {background-color: white; }
+table tr.oddrow {background-color: Gainsboro; }
