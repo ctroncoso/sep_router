@@ -17,10 +17,14 @@ module PatientsHelper
   end
 
   def elapsed_time(patient, filter)
-    if filter == 'finalizado'
+    if filter != 'finalizado'
       distance_of_time_in_words_to_now(patient.started_at+3.hours)
     else
-      distance_of_time_in_words_to_now(patient.started_at, patient.finished_at)
+      (Time.now.midnight + ((patient.started_at - patient.finished_at).abs.round)).to_formatted_s(:time)
     end
+  end
+
+  def puntos_de_servicio(patient)
+    patient.exams.map { |e| e.prestacion.punto_servicio.descripcion}.uniq
   end
 end

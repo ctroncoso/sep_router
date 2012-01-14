@@ -86,7 +86,8 @@ class PrestacionesController < ApplicationController
      p=Exam.includes(:prestacion).where('prestaciones.id' => nil)
      n=p.map do |e|
        { :cod_prestacion => e.prestacion_id, 
-         :descripcion    => e.exam_name
+         :descripcion    => e.exam_name,
+         :punto_servicio_id => 15  # este es el punto de servicio "unknown"
        }
      end.uniq
      n.each do |new|

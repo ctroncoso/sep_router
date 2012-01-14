@@ -2,15 +2,16 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.includes([:exams])
+    params[:sort] ||= "started_at"
+    params[:direction] ||= "desc"
+
+    @patients = Patient.includes(:exams=> :prestacion)
     case params[:filter]
     when 'finalizado'
       @patients = @patients.finished
     else
       @patients = @patients.active
     end
-    params[:sort] ||= "started_at"
-    params[:direction] ||= "desc"
 
     if params[:hace_horas]
       @patients = @patients.hours_ago(params[:hace_horas])
@@ -19,10 +20,16 @@ class PatientsController < ApplicationController
     end
 
 
-    #TODO implement reverse order
-    if params[:sort] =="examenes"
+    case params[:sort]
+    when "examenes"
       @patients.sort! do |a,b|
         a.exams.size <=> b.exams.size
+      end
+    when "elapsed"
+      @patients.sort! do |a,b|
+        a_finished_at = a.finished_at || Time.now
+        b_finished_at = b.finished_at || Time.now
+        (a_finished_at - a.started_at) <=> (b_finished_at - b.started_at)
       end
     else
       @patients = @patients.order(params[:sort])

@@ -23,7 +23,9 @@
     <%= f.label :descripcion %><br />
     <%= f.collection_select(:punto_servicio_id, PuntoServicio.all, :id, :descripcion, {:include_blank => true}) %>
   </div>
+  <% if params[:ee]%>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <% end %>
 <% end %>

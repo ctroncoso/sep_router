@@ -8,16 +8,13 @@ Ingresado a: <%= @exams.first.patient.started_at.to_formatted_s(:long) %> <br />
     <th>Patient</th>
     <th>Exam</th>
     <th>Exam name</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @exams.each do |exam| %>
   <tr>
     <td><%= exam.patient_id %></td>
     <td><%= exam.prestacion_id %></td>
-    <td><%= exam.exam_name %></td>
+    <td><%= link_to exam.exam_name, edit_prestacion_path(exam.prestacion) %></td>
   </tr>
 <% end %>
 </table>

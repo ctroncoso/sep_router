@@ -1,12 +1,16 @@
 <div class="menu_bar">
-  <%= link_to "Pendientes de hoy", patients_path%>
-  <%= link_to "Terminados de hoy", patients_path({:filter =>:finalizado})%>
+  <%= link_to "Pendientes de hoy", patients_path(params.merge({:filter =>:pendientes}))%>
+  <%= link_to "Terminados de hoy", patients_path(params.merge({:filter =>:finalizado}))%>
   <%= link_to_patients_procedures @patients, :finaliza_todos_los_pendientes_de_hoy %> 
 </div>
 <hr />
 
 <h2>Piloto Sistema de Enrutamiento Dinámico SEP-HTS</h2>
-<h1>Listado de Pacientes por atender - <%= @patients.size %> Pacientes pendientes.</h1>
+<% if params[:filter] == "finalizado"%>
+  <h1>Listado de Pacientes Terminados</h1>
+<% else %>
+  <h1>Listado de Pacientes por atender - <%= @patients.size %> Pacientes pendientes.</h1>
+<% end %>
 <hr />
 <table>
   <tr>
@@ -17,7 +21,7 @@
     <th><%= sortable "examenes" %></th>
     <th><%= sortable "started_at", "Hora de llegada" %></th>
     <th><%= sortable "finished_at", "Hora de termino" %></th>
-    <th><%= sortable "started_at", "Transcurrido" %></th>
+    <th><%= sortable "elapsed", "Transcurrido" %></th>
     <th>Examenes</th>
   </tr>
 
@@ -27,11 +31,11 @@
     <td><%= link_to_patient_procedure(patient, params[:filter]) %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
-    <td><%= patient.exams.size %></td>
+    <td><%= puntos_de_servicio(patient).size %></td>
     <td><%= to_time_format(patient.started_at) %></td>
     <td><%= to_time_format(patient.finished_at) %></td>
     <td><%= elapsed_time(patient, params[:filter]) %></td>
-    <td><%= link_to "examenes", patient_exams_url(patient), {:title => patient.exams.map(&:exam_name).join("\n")} %> </td>
+    <td><%= link_to "examenes", patient_exams_url(patient), {:title => puntos_de_servicio(patient).join("\n")} %> </td>
   </tr>
 <% end %>
 </table>
