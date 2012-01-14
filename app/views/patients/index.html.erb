@@ -1,11 +1,12 @@
 <div class="menu_bar">
   <%= link_to "Pendientes de hoy", patients_path%>
   <%= link_to "Terminados de hoy", patients_path({:filter =>:finalizado})%>
+  <%= link_to_patients_procedures @patients, :finaliza_todos_los_pendientes_de_hoy %> 
 </div>
 <hr />
 
 <h2>Piloto Sistema de Enrutamiento Dinámico SEP-HTS</h2>
-<h1>Listado de Pacientes por atender</h1>
+<h1>Listado de Pacientes por atender - <%= @patients.size %> Pacientes pendientes.</h1>
 <hr />
 <table>
   <tr>

@@ -1,4 +1,13 @@
 module PatientsHelper
+  def link_to_patients_procedures(patients, procedure, options={})
+    case procedure 
+    when :finaliza_todos_los_pendientes_de_hoy
+      link_to(" Marcar todos los pendientes como terminados ", 
+              edit_patient_url({:id => :all, :procedure => :finaliza_todos_los_pendientes_de_hoy}), :confirm=>"Esta realmente seguro"
+             )
+    end
+  end
+
   def link_to_patient_procedure(patient, filter)
     if filter == 'finalizado'
       link_to " deshacer ", edit_patient_url(patient, :procedure => :devolver_a_cola)

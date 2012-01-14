@@ -68,6 +68,8 @@ class PatientsController < ApplicationController
       finalizar()
     when "devolver_a_cola"
       nullify_finished_at
+    when 'finaliza_todos_los_pendientes_de_hoy'
+      finalize_todays_queued_patients
     else
       @patient = Patient.find(params[:id])
     end
@@ -139,4 +141,17 @@ private
       format.json { head :ok }
     end
   end
+
+  def finalize_todays_queued_patients
+    Patient.active.of_today.each do |p|
+      p.finished_at = Time.now - 3.hours
+      p.save!
+    end
+    respond_to do |format|
+      format.html { redirect_to patients_url}
+      format.json { head :ok }
+    end
+
+  end
+
 end
