@@ -4,6 +4,7 @@ class PatientsController < ApplicationController
   def index
     params[:sort] ||= "started_at"
     params[:direction] ||= "desc"
+    params[:fecha] ||= Date.today.to_s
 
     @patients = Patient.includes(:exams=> :prestacion)
     case params[:filter]
@@ -13,11 +14,7 @@ class PatientsController < ApplicationController
       @patients = @patients.active
     end
 
-    if params[:fecha]
-      @patients = @patients.of_date(params[:fecha])
-    else
-      @patients = @patients.of_today
-    end
+    @patients = @patients.of_date(params[:fecha])
 
 
     case params[:sort]
@@ -134,7 +131,7 @@ private
     @patient.save!
     
     respond_to do |format|
-      format.html { redirect_to patients_url}
+      format.html { redirect_to patients_url({fecha: params[:fecha]})}
       format.json { head :ok }
     end
   end
@@ -144,7 +141,7 @@ private
     @patient.finished_at = nil
     @patient.save!
     respond_to do |format|
-      format.html { redirect_to patients_url}
+      format.html { redirect_to patients_url({filter: params[:filter], fecha: params[:fecha]}) }
       format.json { head :ok }
     end
   end
