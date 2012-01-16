@@ -7,6 +7,14 @@ $inst_color: #FFA500;
   color:white;
   text-align:left;
 }
+
+#footer {
+  margin: 1px 1px;
+  padding: 1px 3px;
+  background: $inst_color;
+  color:white;
+  text-align:center;
+}
 .menu_bar a {
   display: inline;
   padding: 2px;
@@ -49,9 +57,6 @@ table, td, th {
     }  
   }
 
-#footer {
-  text-align: center;
-}
 
 table tr.evenrow {background-color: white; }
 table tr.oddrow {background-color: Gainsboro; }
