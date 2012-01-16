@@ -1,9 +1,10 @@
 module PatientsHelper
   def link_to_patients_procedures(patients, procedure, options={})
     case procedure 
-    when :finaliza_todos_los_pendientes_de_hoy
-      link_to(" Marcar todos los pendientes como terminados ", 
-              edit_patient_url({:id => :all, :procedure => :finaliza_todos_los_pendientes_de_hoy}), :confirm=>"Esta realmente seguro"
+    when :finaliza_todos_estos_pendientes
+      options[:fecha] ||= Date.today
+      link_to(" Marcar todos estos pendientes como terminados ", 
+              edit_patient_url({:id => :of_date, :procedure => :finaliza_todos_estos_pendientes, fecha: options[:fecha] }), :confirm=>"Esta realmente seguro"
              )
     end
   end
