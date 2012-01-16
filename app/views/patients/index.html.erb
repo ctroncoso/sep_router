@@ -3,10 +3,10 @@
   <%= link_to "Pendientes de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
   <%= link_to "Terminados", patients_path(params.merge({:filter =>:finalizado}))%>
   <%= link_to_patients_procedures @patients, :finaliza_todos_estos_pendientes, fecha: params[:fecha] if params[:ee] %> 
+  <stron><%= date_swicher(params[:fecha]) %></strong> 
 </div>
 <hr />
 
-<stron><%= date_swicher(params[:fecha]) %></strong> 
 <% if params[:filter] == "finalizado"%>
   <h1>Listado de Pacientes Terminados</h1>
 <% else %>
