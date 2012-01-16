@@ -20,7 +20,7 @@ class PatientsController < ApplicationController
     case params[:sort]
     when "examenes"
       @patients.sort! do |a,b|
-        a.exams.size <=> b.exams.size
+        a.exams.map{ |e| e.prestacion.punto_servicio.descripcion}.uniq.size <=> b.exams.map{ |e| e.prestacion.punto_servicio.descripcion}.uniq.size
       end
     when "elapsed"
       @patients.sort! do |a,b|
