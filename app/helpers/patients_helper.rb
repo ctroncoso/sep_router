@@ -35,9 +35,9 @@ module PatientsHelper
     else
       date = Date.today
     end
-    outstring = " | "
+    outstring = ""
     outstring << link_to("<= ", params.merge({:fecha => (date-1.day).to_s}))
-    outstring << l(date, :format=> :long)
+    outstring << l(date, :format=> :long).titleize
     outstring << link_to(" =>", params.merge({:fecha => (date+1.day).to_s}))
     outstring.html_safe
   end

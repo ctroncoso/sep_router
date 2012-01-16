@@ -1,17 +1,26 @@
+$inst_color: #FFA500;
+
+#title {
+  margin: 1px 1px;
+  padding: 17px 3px;
+  background: $inst_color;
+  color:white;
+  text-align:left;
+}
 .menu_bar a {
   display: inline;
   padding: 2px;
-  border: 1px dotted orange;
+  border: 1px dotted $inst_color;
   text-decoration: none;
   color: black;
   &:visited { color: black;}
   &:hover {color: darkgreen;
-    background: orange;
+    background: lighten($inst_color, 20%);
     }
   }
 
 th {
-  background-color: orange;
+  background-color: $inst_color;
   color: white;
   }
 
@@ -35,7 +44,6 @@ table, td, th {
   }
   a {
     color: blue;
-#    text-decoration: none;
     &:visited { color: blue; }
     &:hover { color: red; }
     }  
@@ -47,3 +55,4 @@ table, td, th {
 
 table tr.evenrow {background-color: white; }
 table tr.oddrow {background-color: Gainsboro; }
+hr { margin: 2px 1px; }
