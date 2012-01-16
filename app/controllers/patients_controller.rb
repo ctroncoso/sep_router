@@ -131,7 +131,11 @@ private
     @patient.save!
     
     respond_to do |format|
-      format.html { redirect_to patients_url({fecha: params[:fecha]})}
+      format.html { redirect_to patients_url({
+            :fecha=> params[:fecha],
+            :direction => params[:direction],
+            :sort => params[:sort]
+            })}
       format.json { head :ok }
     end
   end

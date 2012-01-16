@@ -8,9 +8,9 @@
 <hr />
 
 <% if params[:filter] == "finalizado"%>
-  <h1>Listado de Pacientes Terminados</h1>
+  <h1>Listado de Trabajadores Terminados - <%= @patients.size %> finalizados</h1>
 <% else %>
-  <h1>Listado de Pacientes por atender - <%= @patients.size %> Pacientes pendientes.</h1>
+  <h1>Listado de Trabajadores por atender - <%= @patients.size %> pendientes.</h1>
 <% end %>
 <hr />
 <table>

@@ -11,9 +11,19 @@ module PatientsHelper
 
   def link_to_patient_procedure(patient, filter)
     if filter == 'finalizado'
-      link_to " deshacer ", edit_patient_url(patient, {:procedure => :devolver_a_cola, :fecha=> params[:fecha]})
+      link_to " deshacer ", edit_patient_url(patient, {
+            :procedure => :devolver_a_cola, 
+            :fecha=> params[:fecha],
+            :direction => params[:direction],
+            :sort => params[:sort]
+            })
     else
-      link_to " terminado ", edit_patient_url(patient, {:procedure => :finalizar, :fecha => params[:fecha]})
+      link_to " terminado ", edit_patient_url(patient, {
+            :procedure => :finalizar, 
+            :fecha => params[:fecha],
+            :direction => params[:direction],
+            :sort => params[:sort]
+            })
     end
   end
 
