@@ -13,8 +13,8 @@ class PatientsController < ApplicationController
       @patients = @patients.active
     end
 
-    if params[:hace_horas]
-      @patients = @patients.hours_ago(params[:hace_horas])
+    if params[:fecha]
+      @patients = @patients.of_date(params[:fecha])
     else
       @patients = @patients.of_today
     end

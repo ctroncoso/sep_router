@@ -27,4 +27,17 @@ module PatientsHelper
   def puntos_de_servicio(patient)
     patient.exams.map { |e| e.prestacion.punto_servicio.descripcion}.uniq
   end
+
+  def date_swicher(date=nil)
+    if date
+      date = Date.parse(date)
+    else
+      date = Date.today
+    end
+    outstring = " | "
+    outstring << link_to("<= ", params.merge({:fecha => (date-1.day).to_s}))
+    outstring << l(date, :format=> :long)
+    outstring << link_to(" =>", params.merge({:fecha => (date+1.day).to_s}))
+    outstring.html_safe
+  end
 end

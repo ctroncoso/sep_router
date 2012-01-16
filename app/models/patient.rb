@@ -21,4 +21,8 @@ class Patient < ActiveRecord::Base
     where('started_at is not null').where('finished_at is not null')
   end
 
+  def self.of_date(fecha)
+    date = Time.parse(fecha)
+    where(:started_at => (date.midnight..(date.midnight+1.day)))
+  end
 end
