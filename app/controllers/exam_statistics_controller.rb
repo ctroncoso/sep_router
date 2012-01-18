@@ -1,10 +1,6 @@
 class ExamStatisticsController < ApplicationController
   def index
-    @exams = ExamStatistics.prestaciones
-    @exams.sort! do |a,b|
-      a[2] <=> b[2]
-    end.reverse!
-
+    @puntos_servicios = Patient.active.of_today.joins(:exams=>{:prestacion => :punto_servicio}).select("punto_servicios.id, punto_servicios.descripcion, count(*) as cantidad").group('descripcion').order("cantidad desc")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @exams }

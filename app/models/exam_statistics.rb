@@ -5,7 +5,7 @@ class ExamStatistics
   # Exam->patients
   def self.examenes
     timerange = (Time.now.midnight)..Time.now
-    Exam.joins(:patient).includes(:prestacion).where(:patients =>{:started_at =>timerange})
+    Exam.joins(:patient).includes(:prestacion => :punto_servicio).where(:patients =>{:started_at =>timerange})
   end
 
   # Obtiene el universo de prestaciones realizadas el día de hoy.
