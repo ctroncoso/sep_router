@@ -8,10 +8,10 @@
     <th>Cantidad</th>
   </tr>
 
-<% @puntos_servicios.each do |ps| %>
+<% @cola_de_espera.each do |ps| %>
   <tr>
-    <td><%= ps.descripcion %></td>
-    <td><%= ps.cantidad %></td>
+    <td><%= ps[:ps].descripcion %></td>
+    <td><%= ps[:count] %></td>
   </tr>
 <% end %>
 </table>

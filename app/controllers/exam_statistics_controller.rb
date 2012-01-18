@@ -1,6 +1,25 @@
 class ExamStatisticsController < ApplicationController
   def index
-    @puntos_servicios = Patient.active.of_today.joins(:exams=>{:prestacion => :punto_servicio}).select("punto_servicios.id, punto_servicios.descripcion, count(*) as cantidad").group('descripcion').order("cantidad desc")
+    # universo de pacientes pendientes y sus puntos de servicio.
+    p=Patient.active.of_today.joins(:exams=>{:prestacion => :punto_servicio}) \
+      .select("distinct punto_servicios.id as ps_id, patients.id")
+
+    # puntos de servicios individuales que aparecen como pendientes
+    pss=p.map(&:ps_id).uniq.sort
+    set=p.to_a
+    result = pss.map do |id|
+      cantidad = set.count{|x| x.ps_id == id}
+      {id: id, :count => cantidad}
+    end.sort_by{|n| n[:count]}.reverse
+    result.map! do |r|
+      {
+        ps: PuntoServicio.find(r[:id]),
+        count: r[:count]
+      }
+    end
+
+    @cola_de_espera = result
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @exams }
