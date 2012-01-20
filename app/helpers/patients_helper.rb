@@ -23,7 +23,8 @@ module PatientsHelper
             :fecha => params[:fecha],
             :direction => params[:direction],
             :sort => params[:sort]
-            })
+            }), 
+              {:confirm => "Va a finalizar al paciente #{patient.name}. \nConfirme."}
     end
   end
 
