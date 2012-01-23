@@ -25,4 +25,8 @@ class Patient < ActiveRecord::Base
     date = Time.parse(fecha)
     where(:started_at => (date.midnight..(date.midnight+1.day)))
   end
+
+  def self.time_wating_gt(elapsed)
+        active.where(:started_at => (Time.now.midnight..(Time.now-(elapsed.minutes+3.hours))))
+  end
 end

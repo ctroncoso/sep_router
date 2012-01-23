@@ -10,11 +10,13 @@ class PatientsController < ApplicationController
     case params[:filter]
     when 'finalizado'
       @patients = @patients.finished
+      @patients = @patients.of_date(params[:fecha])
+    when 'queue_warning_180'
+      @patients = Patient.time_wating_gt(180)
     else
       @patients = @patients.active
+      @patients = @patients.of_date(params[:fecha])
     end
-
-    @patients = @patients.of_date(params[:fecha])
 
 
     case params[:sort]

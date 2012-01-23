@@ -3,12 +3,16 @@
   <%= link_to "Pendientes de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
   <%= link_to "Terminados", patients_path(params.merge({:filter =>:finalizado}))%>
   <%= link_to_patients_procedures @patients, :finaliza_todos_estos_pendientes, fecha: params[:fecha] if params[:ee] %> 
+  <%= link_to "Mas de 2.5 horas", patients_path(params.merge({:filter =>:queue_warning_180}))%>
   <stron><%= date_swicher(params[:fecha]) %></strong> 
 </div>
 <hr />
 
-<% if params[:filter] == "finalizado"%>
+<% case params[:filter]%>
+<% when "finalizado" %>
   <h1>Listado de Trabajadores Terminados - <%= @patients.size %> finalizados </h1>
+<% when "queue_warning_180" %>
+  <h1>Pacientes en cola por mas de 2.5 horas</h1>
 <% else %>
   <h1>Listado de Trabajadores por atender - <%= @patients.size %> pendientes.</h1>
 <% end %>
