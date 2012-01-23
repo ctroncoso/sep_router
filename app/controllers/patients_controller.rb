@@ -13,6 +13,7 @@ class PatientsController < ApplicationController
       @patients = @patients.of_date(params[:fecha])
     when 'queue_warning_180'
       @patients = Patient.time_wating_gt(180)
+      @unsortable = true
     else
       @patients = @patients.active
       @patients = @patients.of_date(params[:fecha])
@@ -31,7 +32,7 @@ class PatientsController < ApplicationController
         (a_finished_at - a.started_at) <=> (b_finished_at - b.started_at)
       end
     else
-      @patients = @patients.order(params[:sort])
+      @patients = @patients.order(params[:sort]) unless @unsortable
     end
 
     if params[:direction] == "desc"
