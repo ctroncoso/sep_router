@@ -27,6 +27,12 @@ class Patient < ActiveRecord::Base
   end
 
   def self.time_wating_gt(elapsed)
-        active.where(:started_at => (Time.now.midnight..(Time.now-(elapsed.minutes+3.hours))))
+        patients=active.where(:started_at => (Time.now.midnight..(Time.now-(elapsed.minutes+3.hours))))
+        patients.select! do |p|
+          prestaciones=p.exams.map do |e| 
+            e.prestacion.punto_servicio.descripcion
+          end.uniq.size
+          (prestaciones <= 4)
+        end
   end
 end
