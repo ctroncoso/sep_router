@@ -12,6 +12,7 @@ class PatientsController < ApplicationController
       @patients = @patients.finished
       @patients = @patients.of_date(params[:fecha])
     when 'queue_warning_180'
+      #TODO: inject sorting to some method like "sorted_patients"
       @patients = Patient.time_wating_gt(180)
       @unsortable = true
     else
