@@ -1,4 +1,4 @@
 class Cola < ActiveRecord::Base
-  has_one :exam
-  has_one :prestacion
+  belongs_to :exam
+  belongs_to :prestacion
 end
