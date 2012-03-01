@@ -1,3 +1,4 @@
 class Cola < ActiveRecord::Base
-  has_many :exams
+  has_one :exam
+  has_one :prestacion
 end
