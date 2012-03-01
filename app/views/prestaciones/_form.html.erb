@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :descripcion %><br />
-    <%= f.collection_select(:punto_servicio_id, PuntoServicio.all, :id, :descripcion, {:include_blank => true}) %>
+    <%= f.collection_select(:punto_servicio_id, PuntoServicio.all.sort{|a,b| a.descripcion<=>b.descripcion}, :id, :descripcion, {:include_blank => true}) %>
   </div>
   <% if params[:ee]%>
   <div class="actions">

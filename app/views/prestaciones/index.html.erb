@@ -26,7 +26,7 @@
               PuntoServicio.find(prestacion.punto_servicio_id).descripcion else "" end%></td>
     <% if admin %>
     <td><%= link_to 'Show', prestacion %></td>
-    <td><%= link_to 'Edit', edit_prestacion_path(prestacion) %></td>
+    <td><%= link_to 'Edit', edit_prestacion_path(prestacion, :ee => true) %></td>
     <td><%= link_to 'Destroy', prestacion, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>
   </tr>
