@@ -2,7 +2,11 @@ class ColasController < ApplicationController
   # GET /colas
   # GET /colas.json
   def index
-    @colas = Cola.all
+    @colas = Colas
+                .select('punto_servicios.descripcion, count(*) cuenta')
+                .joins(:prestacion => :punto_servicio)
+                .group("punto_servicios.descripcion")
+                .order("descripcion")
 
     respond_to do |format|
       format.html # index.html.erb
