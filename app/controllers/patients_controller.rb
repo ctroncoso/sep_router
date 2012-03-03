@@ -45,6 +45,8 @@ class PatientsController < ApplicationController
       format.json { render json: @patients }
       format.xml { render xml: @patients }
     end
+  rescue 
+    redirect_to prestaciones_carganuevos_url
   end
 
   # GET /patients/1

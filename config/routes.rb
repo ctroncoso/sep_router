@@ -11,7 +11,10 @@ SepRouter::Application.routes.draw do
   match 'estadistica_por_fecha/pacientes_por_prestacion/:prestacion' => "ExamStatistics#pacientes", :as => 'estadistica_pacientes'
   match 'prestaciones/carganuevos' => 'prestaciones#agrega_nuevas_prestaciones'
   
-  resources :colas
+  resources :colas do
+    get 'pacientes', :on => :member
+  end
+
   resources :prestaciones do
     resources :punto_servicios
   end
