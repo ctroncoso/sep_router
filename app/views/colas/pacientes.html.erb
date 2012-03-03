@@ -1,0 +1,21 @@
+<div class="menu_bar">
+  <stron><%= date_swicher(params[:fecha]) %></strong> 
+</div>
+<hr />
+
+<h1>Listing colas</h1>
+
+<table class="hiliteme">
+  <tr>
+    <th>Paciente</th>
+    <th>Rut</th>
+  </tr>
+
+<% @pacientes.each do |paciente| %>
+  <tr>
+    <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n")} %></td>
+    <td><%= paciente.rut %></td>
+  </tr>
+<% end %>
+</table>
+
