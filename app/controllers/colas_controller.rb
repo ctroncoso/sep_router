@@ -2,11 +2,12 @@ class ColasController < ApplicationController
   # GET /colas
   # GET /colas.json
   def index
-    @colas = Cola
-                .select('punto_servicios.descripcion, count(*) cuenta')
-                .joins(:prestacion => :punto_servicio)
-                .group("punto_servicios.descripcion")
-                .order("descripcion")
+    queue = Struct.new(:punto_servicio, :cantidad)
+    @colas = Array.new
+    PuntoServicio.all.each do |ps|
+      cantidad = Cola.of_today.patients_by_punto_servicio(ps).size
+      @colas << queue.new( ps, cantidad )
+    end
 
     respond_to do |format|
       format.html # index.html.erb
