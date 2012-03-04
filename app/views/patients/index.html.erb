@@ -1,3 +1,20 @@
+<script type="text/javascript">
+  $(function() {
+      $( "#exams-dialog" ).dialog({
+                          height: 300,
+                          width: 600,
+                          autoOpen: false,
+                          buttons: {"Ok": function() {
+                                                      $(this).dialog("close");
+                                                      }
+                                  }
+                          });
+      });
+</script>
+
+<div id="exams-dialog" title="Examenes" style="display: hidden;">
+  lorem
+</div>
 <div class="menu_bar">
   <%= link_to "Pendientes", patients_path(params.merge({:filter =>:pendientes}))%>
   <%= link_to "Pendientes de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
@@ -41,11 +58,10 @@
     <td><%= to_time_format(patient.started_at) %></td>
     <td><%= to_time_format(patient.finished_at) %></td>
     <td><%= elapsed_time(patient, params[:filter]) %></td>
-    <td><%= link_to "examenes", patient_exams_url(patient), {:title => puntos_de_servicio(patient).join("\n")} %> </td>
+    <td><%= link_to "examenes", patient_exams_url(patient), {:remote => true, :title => puntos_de_servicio(patient).join("\n")} %> </td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
 

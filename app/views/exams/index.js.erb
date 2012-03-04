@@ -1,0 +1,5 @@
+$("#exams-dialog").dialog("close");
+$("#exams-dialog").html("<%= escape_javascript render("table")%>");
+$("#exams-dialog").dialog("option","title", "<strong> <%= @exams.first.patient.name %> </strong>");
+$("#exams-dialog").dialog("open");
+

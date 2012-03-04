@@ -24,7 +24,10 @@ class Cola < ActiveRecord::Base
   end
   
   def self.patients_by_punto_servicio(punto_servicio_id)
-    find_by_ps(punto_servicio_id).includes(:exam => :patient).map{|e| e.exam.patient}.uniq
+    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient).map{|e| e.exam.patient}.uniq
+    pts.sort do |p1, p2|
+      p1.name <=> p2.name
+    end
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)

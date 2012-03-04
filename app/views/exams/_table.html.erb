@@ -1,0 +1,11 @@
+<table class="hiliteme" style="width: 95%">
+  <tr>
+    <th>Exam name</th>
+  </tr>
+
+<% @exams.each do |exam| %>
+  <tr>
+    <td><%= exam.exam_name %></td>
+  </tr>
+<% end %>
+</table>

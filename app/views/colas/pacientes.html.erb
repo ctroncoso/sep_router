@@ -14,7 +14,7 @@
 <% @pacientes.each do |paciente| %>
   <tr>
     <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n")} %></td>
-    <td><%= paciente.rut %></td>
+    <td style="text-align:right"><%= paciente.rut %></td>
   </tr>
 <% end %>
 </table>
