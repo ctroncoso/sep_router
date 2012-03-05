@@ -1,7 +1,7 @@
 class ExamsController < ApplicationController
   def index
     if params[:patient_id] 
-      @exams = Patient.find(params[:patient_id]).exams
+      @exams = Patient.find(params[:patient_id]).exams.order(:exam_name)
     else
       @exams = ExamStatistics.examenes_hoy
     end
