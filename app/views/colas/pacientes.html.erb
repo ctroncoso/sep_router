@@ -1,9 +1,25 @@
+<script type="text/javascript">
+  $(function() {
+      $( "#exams-dialog" ).dialog({
+                          height: 300,
+                          width: 600,
+                          autoOpen: false,
+                          buttons: {"Ok": function() {
+                                                      $(this).dialog("close");
+                                                      }
+                                  }
+                          });
+      });
+</script>
+
+<div id="exams-dialog" title="Examenes" style="display: hidden;">
+</div>
 <div class="menu_bar">
   <stron><%= date_swicher(params[:fecha]) %></strong> 
 </div>
 <hr />
 
-<h1>Listing colas</h1>
+<h1>Listing  <%= (PuntoServicio.find params[:id]).descripcion %></h1>
 
 <table class="hiliteme">
   <tr>
@@ -13,7 +29,7 @@
 
 <% @pacientes.each do |paciente| %>
   <tr>
-    <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n")} %></td>
+    <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n"), :remote => true} %></td>
     <td style="text-align:right"><%= paciente.rut %></td>
   </tr>
 <% end %>
