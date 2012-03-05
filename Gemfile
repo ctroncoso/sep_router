@@ -8,6 +8,7 @@ gem 'rails', '3.1.0'
 gem 'mysql2'
 gem 'sqlite3'
 gem 'unicode_utils'
+gem 'yaml_db'
 
 
 # Gems used only for assets and not required
