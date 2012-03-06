@@ -25,6 +25,7 @@
   <tr>
     <th>Paciente</th>
     <th>Rut</th>
+    <th>Hora de Ingreso</th>
     <th></th>
   </tr>
 
@@ -32,6 +33,7 @@
   <tr>
     <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n"), :remote => true} %></td>
     <td style="text-align:right"><%= paciente.rut %></td>
+    <td></td>
     <td><%= link_to "terminado", terminar_colas_path(:ps => params[:id], :rut => paciente.rut),{:confirm => "Confirme que el trabajador sea \nNombre:#{paciente.name}\nRut: #{paciente.rut}"}%></td>
   </tr>
 <% end %>

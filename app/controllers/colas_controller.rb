@@ -3,11 +3,13 @@ class ColasController < ApplicationController
   # GET /colas.json
   def index
     params[:fecha] ||= Date.today.to_s
+    
+    pendientes = params[:pend]=="true" 
 
     queue = Struct.new(:punto_servicio, :cantidad)
     @colas = Array.new
     PuntoServicio.order(:descripcion).all.each do |ps|
-      cantidad = Cola.of_date(params[:fecha]).patients_by_punto_servicio(ps).size
+      cantidad = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, pendientes ).size
       @colas << queue.new( ps, cantidad )
     end
 

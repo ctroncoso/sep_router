@@ -19,15 +19,23 @@ class Cola < ActiveRecord::Base
     where(:colas => {:created_at => date.midnight..(date.midnight+1.day) } )
   end
 
+  def self.pending
+    where("colas.finished_at is null")
+  end
+
+  def self.finished
+    where("colas.finished_at is not null")
+  end
+    
   def self.find_by_ps(punto_servicio_id)
     includes(:prestacion => :punto_servicio).where(:punto_servicios => {:id => punto_servicio_id})
   end
   
-  def self.patients_by_punto_servicio(punto_servicio_id)
-    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient).where("colas.finished_at is null").map{|e| e.exam.patient}.uniq
-    pts.sort do |p1, p2|
-      p1.name <=> p2.name
-    end
+  def self.patients_by_punto_servicio(punto_servicio_id, status = false)
+    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient)
+    pts= status ? pts.finished : pts.pending
+    pts=pts.map{|e| e.exam.patient}.uniq
+    pts.sort_by!(&:name)
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)
