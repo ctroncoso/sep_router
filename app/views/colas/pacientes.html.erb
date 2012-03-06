@@ -25,12 +25,14 @@
   <tr>
     <th>Paciente</th>
     <th>Rut</th>
+    <th></th>
   </tr>
 
 <% @pacientes.each do |paciente| %>
   <tr>
     <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n"), :remote => true} %></td>
     <td style="text-align:right"><%= paciente.rut %></td>
+    <td><%= link_to "terminado", terminar_colas_path(:ps => params[:id], :rut => paciente.rut)%></td>
   </tr>
 <% end %>
 </table>

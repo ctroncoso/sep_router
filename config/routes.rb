@@ -13,6 +13,7 @@ SepRouter::Application.routes.draw do
   
   resources :colas do
     get 'pacientes', :on => :member
+    get 'terminar', :on => :collection
   end
 
   resources :prestaciones do

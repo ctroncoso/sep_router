@@ -20,21 +20,20 @@ class Cola < ActiveRecord::Base
   end
 
   def self.find_by_ps(punto_servicio_id)
-    joins(:prestacion => :punto_servicio).where(:punto_servicios => {:id => punto_servicio_id})
+    includes(:prestacion => :punto_servicio).where(:punto_servicios => {:id => punto_servicio_id})
   end
   
   def self.patients_by_punto_servicio(punto_servicio_id)
-    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient).map{|e| e.exam.patient}.uniq
+    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient).where("colas.finished_at is null").map{|e| e.exam.patient}.uniq
     pts.sort do |p1, p2|
       p1.name <=> p2.name
     end
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)
-    find_by_ps(punto_servicio_id).joins(:exam => :patient).where(:patients => {:rut => rut})
+    find_by_ps(punto_servicio_id).includes(:exam => :patient).where(:patients => {:rut => rut})
     # para obtener lista 
     # r.map {|e| [e.id, e.exam.prestacion.descripcion, e.prestacion.punto_servicio.descripcion, e.exam.patient.name]}
   end
-
 
 end

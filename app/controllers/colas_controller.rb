@@ -27,4 +27,15 @@ class ColasController < ApplicationController
       format.json { render json: @colas }
     end
   end
+  
+  def terminar
+    @colas = Cola.exams_by_punto_servicio_and_rut(params[:ps], params[:rut])
+
+    @colas.each do |e|
+      e.finished_at = Time.now
+      e.save!
+    end
+
+    redirect_to request.referer
+  end
 end
