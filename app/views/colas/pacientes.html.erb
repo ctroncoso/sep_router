@@ -15,7 +15,9 @@
 <div id="exams-dialog" title="Examenes" style="display: hidden;">
 </div>
 <div class="menu_bar">
-  <stron><%= date_swicher(params[:fecha]) %></strong> 
+  <stron><%= date_swicher(params[:fecha]) %></strong>
+<%= link_to "Pendientes", pacientes_cola_path(params[:id], :fecha => params[:fecha]) %>
+<%= link_to "Finalizados", pacientes_cola_path(params[:id], :fecha => params[:fecha]) %>
 </div>
 <hr />
 
