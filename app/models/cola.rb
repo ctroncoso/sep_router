@@ -44,7 +44,6 @@ class Cola < ActiveRecord::Base
       pts = pts.pending
     end
     pts=pts.map{|e| e.patient}.uniq
-    pts.sort_by!(&:name)
   end
 
   def self.exams_by_punto_servicio_and_patient_id(punto_servicio_id, patient_id)

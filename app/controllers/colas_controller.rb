@@ -22,6 +22,11 @@ class ColasController < ApplicationController
     params[:fecha] ||= Date.today.to_s
 
     @pacientes = Cola.of_date(params[:fecha]).patients_by_punto_servicio(params[:id], params[:condicion])
+    if params[:sort]=="started_at" 
+      @pacientes.sort_by!(&:started_at)
+    else
+      @pacientes.sort_by!(&:name)
+    end
 
     respond_to do |format|
       format.html # pacientes.html.erb
