@@ -35,10 +35,10 @@ class Cola < ActiveRecord::Base
   
   def self.patients_by_punto_servicio(punto_servicio_id, s = :pending)
     pts = find_all_by_ps(punto_servicio_id)
-    case s.to_sym
-    when :pending
+    case s
+    when "pending"
       pts = pts.pending
-    when :finished
+    when "finished"
       pts = pts.finished
     else
       pts = pts.pending
