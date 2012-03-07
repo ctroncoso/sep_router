@@ -21,7 +21,7 @@
 </div>
 <hr />
 
-<h1>Listing  <%= (PuntoServicio.find params[:id]).descripcion %></h1>
+<h1><%= (PuntoServicio.find params[:id]).descripcion %> - <%= @pacientes.size %> <%= params[:condicion]=="finished" ? "Finalizados" : "Pendientes" %></h1>
 
 <table class="hiliteme">
   <tr>
