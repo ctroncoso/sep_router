@@ -47,7 +47,7 @@ class Cola < ActiveRecord::Base
     end
     logger.info "finished case"
     pts=pts.map{|e| e.exam.patient}.uniq
-    pts.sort_by!(&:name)
+    pts.sort_by!(&:started_at)
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)
