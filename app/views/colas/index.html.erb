@@ -1,7 +1,7 @@
 <div class="menu_bar">
   <stron><%= date_swicher(params[:fecha]) %></strong> 
-<%= link_to "Pendientes", colas_path(:fecha => params[:fecha]) %>
-<%= link_to "Finalizados", colas_path(:fecha => params[:fecha], :pend => true) %>
+<%= link_to "Pendientes", colas_path(:fecha => params[:fecha], :condicion => :pending) %>
+<%= link_to "Finalizados", colas_path(:fecha => params[:fecha] , :condicion => :finished) %>
 </div>
 
 <hr />

@@ -31,9 +31,21 @@ class Cola < ActiveRecord::Base
     includes(:prestacion => :punto_servicio).where(:punto_servicios => {:id => punto_servicio_id})
   end
   
-  def self.patients_by_punto_servicio(punto_servicio_id, status = false)
-    pts=find_by_ps(punto_servicio_id).includes(:exam => :patient)
-    pts= status ? pts.finished : pts.pending
+  def self.patients_by_punto_servicio(punto_servicio_id, s = :pending)
+    pts = find_by_ps(punto_servicio_id).includes(:exam => :patient)
+    logger.info "about to start case"
+    logger.info "s is #{s}, and it's class is #{s.class}"
+    case s
+    when "pending"
+      logger.info "status is pending"
+      pts = pts.pending
+    when "finished"
+      logger.info "status is finished"
+      pts = pts.finished
+    else
+      pts = pts.pending
+    end
+    logger.info "finished case"
     pts=pts.map{|e| e.exam.patient}.uniq
     pts.sort_by!(&:name)
   end

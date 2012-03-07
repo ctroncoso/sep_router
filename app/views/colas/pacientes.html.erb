@@ -16,8 +16,8 @@
 </div>
 <div class="menu_bar">
   <stron><%= date_swicher(params[:fecha]) %></strong>
-<%= link_to "Pendientes", pacientes_cola_path(params[:id], :fecha => params[:fecha]) %>
-<%= link_to "Finalizados", pacientes_cola_path(params[:id], :fecha => params[:fecha]) %>
+  <%= link_to "Pendientes", pacientes_cola_path(params[:id], :fecha => params[:fecha], :condicion => :pending ) %>
+  <%= link_to "Finalizados", pacientes_cola_path(params[:id], :fecha => params[:fecha], :condicion => :finished ) %>
 </div>
 <hr />
 
@@ -35,7 +35,7 @@
   <tr>
     <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n"), :remote => true} %></td>
     <td style="text-align:right"><%= paciente.rut %></td>
-    <td></td>
+    <td><%=  to_time_format(paciente.started_at) %></td>
     <td><%= link_to "terminado", terminar_colas_path(:ps => params[:id], :rut => paciente.rut),{:confirm => "Confirme que el trabajador sea \nNombre:#{paciente.name}\nRut: #{paciente.rut}"}%></td>
   </tr>
 <% end %>
