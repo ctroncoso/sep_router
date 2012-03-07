@@ -7,8 +7,8 @@ class ColasController < ApplicationController
     queue = Struct.new(:punto_servicio, :pendientes, :finalizados)
     @colas = Array.new
     PuntoServicio.order(:descripcion).all.each do |ps|
-      pendientes = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, :pending ).size
-      finalizados = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, :finished ).size
+      pendientes = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, "pending" ).size
+      finalizados = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, "finished" ).size
       @colas << queue.new( ps, pendientes, finalizados )
     end
 
