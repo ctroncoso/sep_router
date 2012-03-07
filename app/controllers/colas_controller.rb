@@ -29,7 +29,7 @@ class ColasController < ApplicationController
   end
   
   def terminar
-    @colas = Cola.exams_by_punto_servicio_and_rut(params[:ps], params[:rut])
+    @colas = Cola.exams_by_punto_servicio_and_patient_id(params[:ps], params[:patient_id])
 
     @colas.each do |e|
       e.finished_at = Time.now

@@ -33,10 +33,10 @@
 
 <% @pacientes.each do |paciente| %>
   <tr>
-    <td><%= link_to paciente.name, patient_exams_path(paciente),{:title => puntos_de_servicio(paciente).join("\n"), :remote => true} %></td>
+    <td><%= link_to paciente.name, patient_exams_path(paciente),{:remote => true} %></td>
     <td style="text-align:right"><%= paciente.rut %></td>
     <td><%=  to_time_format(paciente.started_at) %></td>
-    <td><%= link_to "terminado", terminar_colas_path(:ps => params[:id], :rut => paciente.rut),{:confirm => "Confirme que el trabajador sea \nNombre:#{paciente.name}\nRut: #{paciente.rut}"}%></td>
+    <td><%= link_to "terminado", terminar_colas_path(:ps => params[:id], :id => paciente.id),{:confirm => "Confirme que el trabajador sea \n#{paciente.name}\nRut: #{paciente.rut}"}%></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,8 @@
 class Cola < ActiveRecord::Base
   belongs_to :exam
   belongs_to :prestacion
+  belongs_to :patient
+  belongs_to :punto_servicio
 
   def self.hours_ago(hours=nil)
     if hours.nil?
@@ -27,27 +29,28 @@ class Cola < ActiveRecord::Base
     where("colas.finished_at is not null")
   end
     
-  def self.find_by_ps(punto_servicio_id)
-    includes(:prestacion => :punto_servicio).where(:punto_servicios => {:id => punto_servicio_id})
+  def self.find_all_by_ps(punto_servicio_id)
+    where({:punto_servicio_id => punto_servicio_id})
   end
   
   def self.patients_by_punto_servicio(punto_servicio_id, s = :pending)
-    pts = find_by_ps(punto_servicio_id).includes(:exam => :patient)
-    logger.info "about to start case"
-    logger.info "s is #{s}, and it's class is #{s.class}"
+    pts = find_all_by_ps(punto_servicio_id)
     case s
     when "pending"
-      logger.info "status is pending"
       pts = pts.pending
     when "finished"
-      logger.info "status is finished"
       pts = pts.finished
     else
       pts = pts.pending
     end
-    logger.info "finished case"
-    pts=pts.map{|e| e.exam.patient}.uniq
+    pts=pts.map{|e| e.patient}.uniq
     pts.sort_by!(&:started_at)
+  end
+
+  def self.exams_by_punto_servicio_and_patient_id(punto_servicio_id, patient_id)
+    find_by_ps(punto_servicio_id)..where(:patient_id => :patient_id)
+    # para obtener lista 
+    # r.map {|e| [e.id, e.exam.prestacion.descripcion, e.prestacion.punto_servicio.descripcion, e.exam.patient.name]}
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)
@@ -55,5 +58,6 @@ class Cola < ActiveRecord::Base
     # para obtener lista 
     # r.map {|e| [e.id, e.exam.prestacion.descripcion, e.prestacion.punto_servicio.descripcion, e.exam.patient.name]}
   end
+  
 
 end

@@ -16,7 +16,12 @@ class IseriesLoaderController < ApplicationController
         p.save!
         IngresosSepHts.examenes(pac).each do |exm|
           e = p.exams.create(exm)
-          c = Cola.new( {:exam_id => e.id, :prestacion_id => e.prestacion.id})
+          c = Cola.new( {
+                       :exam_id             => e.id, 
+                       :prestacion_id       => e.prestacion.id,
+                       :patient_id          => p.id,
+                       :punto_servicio_id   => e.prestacion.punto_servicio.id
+          })
           c.save!
         end
       end
