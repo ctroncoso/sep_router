@@ -1,7 +1,5 @@
 <div class="menu_bar">
   <stron><%= date_swicher(params[:fecha]) %></strong> 
-<%= link_to "Pendientes", colas_path(:fecha => params[:fecha], :condicion => :pending) %>
-<%= link_to "Finalizados", colas_path(:fecha => params[:fecha] , :condicion => :finished) %>
 </div>
 
 <hr />
@@ -10,13 +8,15 @@
 <table class="hiliteme">
   <tr>
     <th>Punto de Servicio</th>
-    <th>Cuenta</th>
+    <th>Pendientes</th>
+    <th>Finalizados</th>
   </tr>
 
 <% @colas.each do |cola| %>
   <tr>
     <td><%= link_to cola.punto_servicio.descripcion, pacientes_cola_path(cola.punto_servicio.id, :fecha => params[:fecha]) %></td>
-    <td><%= cola.cantidad %></td>
+    <td><%= cola.pendientes %></td>
+    <td><%= cola.finalizados %></td>
   </tr>
 <% end %>
 </table>

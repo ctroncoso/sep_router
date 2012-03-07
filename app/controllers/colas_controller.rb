@@ -4,11 +4,12 @@ class ColasController < ApplicationController
   def index
     params[:fecha] ||= Date.today.to_s
     
-    queue = Struct.new(:punto_servicio, :cantidad)
+    queue = Struct.new(:punto_servicio, :pendientes, :finalizados)
     @colas = Array.new
     PuntoServicio.order(:descripcion).all.each do |ps|
-      cantidad = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, params[:condicion] ).size
-      @colas << queue.new( ps, cantidad )
+      pendientes = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, :pending ).size
+      finalizados = Cola.of_date(params[:fecha]).patients_by_punto_servicio( ps, :finished ).size
+      @colas << queue.new( ps, pendientes, finalizados )
     end
 
     respond_to do |format|
