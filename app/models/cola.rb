@@ -48,13 +48,13 @@ class Cola < ActiveRecord::Base
   end
 
   def self.exams_by_punto_servicio_and_patient_id(punto_servicio_id, patient_id)
-    find_by_ps(punto_servicio_id)..where(:patient_id => :patient_id)
+    find_all_by_ps(punto_servicio_id).where(:patient_id => patient_id)
     # para obtener lista 
     # r.map {|e| [e.id, e.exam.prestacion.descripcion, e.prestacion.punto_servicio.descripcion, e.exam.patient.name]}
   end
 
   def self.exams_by_punto_servicio_and_rut(punto_servicio_id, rut)
-    find_by_ps(punto_servicio_id).includes(:exam => :patient).where(:patients => {:rut => rut})
+    find_all_by_ps(punto_servicio_id).includes(:exam => :patient).where(:patients => {:rut => rut})
     # para obtener lista 
     # r.map {|e| [e.id, e.exam.prestacion.descripcion, e.prestacion.punto_servicio.descripcion, e.exam.patient.name]}
   end
