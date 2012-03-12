@@ -60,7 +60,7 @@ class IngresosSepHts < ActiveRecord::Base
   def self.tiempo_ultima_carga 
     record=order("fecing647a desc, horing647a desc").limit(1)
     {:fecha => record.first.FECPRO647A,
-     :hora => record.first.HORPRO647A - 10.minutes
+     :hora => params[:today]==full ? Time.now.midnight : (record.first.HORPRO647A - 10.minutes)
     }
   end
 end
