@@ -32,7 +32,7 @@ SepRouter::Application.routes.draw do
 
 
 
-  root :to => 'patients#index'
+  root :to => 'colas#index'
 
 
   # The priority is based upon order of creation:
