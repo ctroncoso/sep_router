@@ -7,18 +7,7 @@ class PatientsController < ApplicationController
     params[:fecha] ||= Date.today.to_s
 
     @patients = Patient.includes(:exams=> :prestacion)
-    case params[:filter]
-    when 'finalizado'
-      @patients = @patients.finished
-      @patients = @patients.of_date(params[:fecha])
-    when 'queue_warning_180'
-      #TODO: inject sorting to some method like "sorted_patients"
-      @patients = Patient.time_wating_gt(180) || []
-      @unsortable = true
-    else
-      @patients = @patients.active
-      @patients = @patients.of_date(params[:fecha])
-    end
+    @patients = @patients.of_date(params[:fecha])
 
 
     case params[:sort]

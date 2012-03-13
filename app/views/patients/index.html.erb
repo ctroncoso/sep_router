@@ -15,48 +15,34 @@
 <div id="exams-dialog" title="Examenes" style="display: hidden;">
 </div>
 <div class="menu_bar">
-  <%= link_to "Pendientes", patients_path(params.merge({:filter =>:pendientes}))%>
-  <%= link_to "Pendientes de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
-  <%= link_to "Terminados", patients_path(params.merge({:filter =>:finalizado}))%>
-  <%= link_to_patients_procedures @patients, :finaliza_todos_estos_pendientes, fecha: params[:fecha] if params[:ee] %> 
-  <%= link_to "Mas de 2.5 horas", patients_path(params.merge({:filter =>:queue_warning_180}))%>
+  <%= link_to "Mostrar trabajadores de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
   <stron><%= date_swicher(params[:fecha]) %></strong> 
 </div>
 <hr />
 
-<% case params[:filter]%>
-<% when "finalizado" %>
-  <h1>Listado de Trabajadores Terminados - <%= @patients.size %> finalizados </h1>
-<% when "queue_warning_180" %>
-  <h1>Pacientes en cola por mas de 2.5 horas</h1>
-<% else %>
-  <h1>Listado de Trabajadores por atender - <%= @patients.size %> pendientes.</h1>
-<% end %>
+<h1>Listado de Trabajadores  - <%= @patients.size %>  </h1>
+
 <h3>Hasta las <%= Time.now.to_formatted_s(:time) %> de hoy.</h3>
 <hr />
 <table class="hiliteme">
   <tr>
     <th><%= sortable "name", "Nombre" %></th>
-    <th>Estado</th>
     <th><%= sortable "rut", "Rut" %></th>
     <th><%= sortable "rut_empresa", "Rut Empresa" %></th>
     <th><%= sortable "examenes", "Prestaciones" %></th>
     <th><%= sortable "started_at", "Llegada" %></th>
     <th><%= sortable "finished_at", "Termino" %></th>
-    <th><%= sortable "elapsed", "Transcurrido" %></th>
     <th>Examenes</th>
   </tr>
 
 <% @patients.each do |patient| %>
   <tr class="<%= cycle('oddrow', 'evenrow') %>">
     <td><%= link_to patient.name, patient  %></td>
-    <td><%= link_to_patient_procedure(patient, params[:filter]) %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
     <td><%= puntos_de_servicio(patient).size %></td>
     <td><%= to_time_format(patient.started_at) %></td>
     <td><%= to_time_format(patient.finished_at) %></td>
-    <td><%= elapsed_time(patient, params[:filter]) %></td>
     <td><%= link_to "examenes", patient_exams_url(patient), {:remote => true, :title => puntos_de_servicio(patient).join("\n")} %> </td>
   </tr>
 <% end %>
