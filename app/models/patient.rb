@@ -1,5 +1,6 @@
 class Patient < ActiveRecord::Base
   has_many :exams
+  has_many :colas
 
   def self.hours_ago(hours=nil)
     if hours.nil?
