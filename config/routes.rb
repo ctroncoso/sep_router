@@ -1,7 +1,7 @@
 SepRouter::Application.routes.draw do
 
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
 
   match 'loader/full' => 'iseries_loader#render_full'
   match 'loader/pacientes' => 'iseries_loader#render_pacientes'

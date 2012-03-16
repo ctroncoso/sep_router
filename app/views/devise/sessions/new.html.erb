@@ -1,17 +1,22 @@
 <h2>Login</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :username %><br />
+  <div><%= f.label :username, "Usuario" %><br />
   <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :password, "Contraseña" %><br />
   <%= f.password_field :password %></div>
 
   <% if devise_mapping.rememberable? -%>
     <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
+  <div><%= f.submit "OK" %></div>
 <% end %>
 
 <%# <%= render "links" %1> %>
+<script type="text/javascript">
+  $(document).ready(function() {
+      alert("Si no posee clave de acceso, favor usar las siguientes credenciales:\n-------------------------\nUsuario: sep\nContraseña: sep2012\n-------------------------\nEsta cuenta permanecerá válida hasta el miércoles 21 de marzo.\nSolicite a Cecilia Melo o Pablo Covarrubias la creación de su cuenta particular.");
+      })
+</script>
