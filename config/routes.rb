@@ -1,6 +1,8 @@
 SepRouter::Application.routes.draw do
 
 
+  devise_for :users
+
   match 'loader/full' => 'iseries_loader#render_full'
   match 'loader/pacientes' => 'iseries_loader#render_pacientes'
   match 'loader/examenes' => 'iseries_loader#render_examenes'

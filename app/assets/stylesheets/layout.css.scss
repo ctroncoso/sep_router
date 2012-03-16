@@ -62,3 +62,11 @@ table tr.evenrow {background-color: white; }
 table tr.oddrow {background-color: Gainsboro; }
 table tr.highlight {background-color: lightblue; } 
 hr { margin: 2px 1px; }
+#user_nav {
+  margin: 1px 1px;
+  padding: 0px 0px;
+  background: darkblue;
+  color: white;
+  text-align: right;
+  a {color: lightgrey;}
+}

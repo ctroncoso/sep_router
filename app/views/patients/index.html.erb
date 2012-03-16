@@ -14,6 +14,11 @@
 
 <div id="exams-dialog" title="Examenes" style="display: hidden;">
 </div>
+
+<% content_for :menubar do %>
+  <%= render "partials/menubar"%>
+<% end %>
+
 <div class="menu_bar">
   <%= link_to "Mostrar trabajadores de hoy", patients_path(params.merge({:filter =>:pendientes, fecha: Date.today}))%>
   <stron><%= date_swicher(params[:fecha]) %></strong> 
@@ -37,7 +42,7 @@
 
 <% @patients.each do |patient| %>
   <tr class="<%= cycle('oddrow', 'evenrow') %>">
-    <td><%= link_to patient.name, patient  %></td>
+    <td><%= patient.name  %></td>
     <td><%= patient.rut %></td>
     <td><%= patient.rut_empresa %></td>
     <td><%= puntos_de_servicio(patient).size %></td>
