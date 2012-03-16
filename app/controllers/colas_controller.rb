@@ -1,4 +1,6 @@
 class ColasController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /colas
   # GET /colas.json
   def index

@@ -1,4 +1,6 @@
 class PrestacionesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /prestacions
   # GET /prestacions.json
   def index

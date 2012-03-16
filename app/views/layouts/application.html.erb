@@ -31,7 +31,7 @@
         <%= current_user.username %>
         <%= link_to "Cerrar Session", destroy_user_session_path, :method => :delete %>
       <% else %>
-        <%= link_to "Login", new_user_session_path %>.
+        <%= link_to "Login", new_user_session_path %> &nbsp;
       <% end %>
   </div>
   <h1 id="title" class="ui-corner-top">Piloto Sistema de Enrutamiento Dinámico SEP-HTS</h1>
