@@ -3,10 +3,15 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px; }
+  line-height: 18px; 
+  margin: 0px;
+  padding: 0px 2px;
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
+  
+  text-align: center;
   font-size: 13px;
   line-height: 18px; }
 
@@ -21,7 +26,12 @@ div {
     margin-bottom: 10px; } }
 
 #notice {
-  color: green; }
+  color: red;
+  background: lightgreen;
+  border:1px solid green;
+  text-align: center;
+
+}
 
 .field_with_errors {
   padding: 2px;

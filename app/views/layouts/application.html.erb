@@ -26,8 +26,6 @@
   </script>
 </head>
 <body>
-  <div id="notice"><%= notice %></div>
-  <div id="alert"><%= alert %></div>
   <div id="user_nav">
       <% if user_signed_in? %>
         <%= current_user.username %>
@@ -37,6 +35,12 @@
       <% end %>
   </div>
   <h1 id="title" class="ui-corner-top">Piloto Sistema de Enrutamiento Dinámico SEP-HTS</h1>
+  <% if flash[:notice] %>
+    <div id="notice"><%= notice %></div>
+  <% end %>
+  <% if flash[:notice] %>
+    <div id="alert"><%= alert %></div>
+  <% end %>
   <hr />
   <%= yield :menubar %>
   <hr />
