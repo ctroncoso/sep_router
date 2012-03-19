@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20120316124848) do
     t.integer  "punto_servicio_id"
   end
 
+  create_table "empresas", :id => false, :force => true do |t|
+    t.string  "nomemp647a", :limit => 80
+    t.integer "rutemp647a"
+  end
+
+  add_index "empresas", ["rutemp647a"], :name => "rutemp647a", :unique => true
+
   create_table "exams", :force => true do |t|
     t.integer  "patient_id"
     t.integer  "prestacion_id", :limit => 8
