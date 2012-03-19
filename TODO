@@ -1,0 +1,29 @@
+Pendientes:
+  - Completar módulo de usuarios
+    Admin:
+      Administración de usuarios
+        Habilitación/Deshabilitación
+        Timeout dinámico
+      Listado pacientes finalizados por médico
+        Diario
+        Mensual
+    Médico
+      Listado pacientes pacientes finalizados 
+        hoy
+        fecha
+        mensual
+  - Arreglar pendientes por cola
+    Cola de consulta médica solo con pacientes que:
+      no tengan exámenes pendientes
+      ECG terminado > 20 minutos
+      Muestra venosa > 2 horas
+      Muestra orina > 2 horas
+  - Zona horaria
+    Iseries entrega hora en UTC-3, compensar para hora Zulu.
+  - Priorización
+    Al terminar paciente, debe iniciar contardor de "tiempo idle"
+    Cálculo valor de "Tiempo idle" => (Numero de puntos de servicios)/(Minutos idle)
+  - Optimización cálculo de pacientes pendientes por cola
+    Depende de "Arreglar pendientes por cola"
+    Genera sobre 250 consultas SQL en cada click.
+
