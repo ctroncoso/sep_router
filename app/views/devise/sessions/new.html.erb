@@ -14,9 +14,14 @@
   <div><%= f.submit "OK" %></div>
 <% end %>
 
-<%# <%= render "links" %1> %>
-<script type="text/javascript">
-  $(document).ready(function() {
+<%= render "links" %>
+  <script type="text/javascript">
+    <!--
+  $(
+      function()
+      {
       alert("Si no posee clave de acceso, favor usar las siguientes credenciales:\n-------------------------\nUsuario: sep\nContraseña: sep2012\n-------------------------\nEsta cuenta permanecerá válida hasta el miércoles 21 de marzo.\nSolicite a Cecilia Melo o Pablo Covarrubias la creación de su cuenta particular.");
-      })
-</script>
+      }
+   )
+  //-->
+  </script>
